@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel Admin - Eventos</title>
+  <link rel="stylesheet" href="./styles/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <header class="admin-header">
+    <h1>Administrador de Eventos</h1>
+    <button class="logout-btn" onclick="logout()">Cerrar sesión</button>
+  </header>
+
+  <main class="admin-main">
+    <section class="admin-section active" id="events">
+      <div class="section-header">
+        <h2>Eventos</h2>
+        <button class="primary-btn" onclick="showEventModal()">+ Agregar Evento</button>
+      </div>
+
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Fecha</th>
+              <th>Ubicación</th>
+              <th>Cupos</th>
+              <th>Inscritos</th>
+              <th>Estado</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="eventsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de Evento -->
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="eventModalTitle">Nuevo Evento</h3>
+        <button class="close-btn" onclick="closeEventModal()">&times;</button>
+      </div>
+      <form id="eventForm" class="modal-body">
+        <input type="text" id="eventTitle" placeholder="Título del evento" required />
+        <input type="date" id="eventDate" required />
+        <input type="time" id="eventTime" required />
+        <input type="text" id="eventLocation" placeholder="Ubicación" required />
+        <input type="number" id="eventCapacity" placeholder="Cupos" required />
+        <input type="number" id="eventPrice" placeholder="Precio" required />
+        <input type="text" id="eventCategory" placeholder="Categoría" required />
+        <input type="text" id="eventImage" placeholder="URL de imagen" />
+        <input type="text" id="eventOrganizer" placeholder="Organizador" required />
+        <textarea id="eventDescription" placeholder="Descripción"></textarea>
+        <textarea id="eventRequirements" placeholder="Requisitos"></textarea>
+        <div class="form-actions">
+          <button type="button" class="secondary-btn" onclick="closeEventModal()">Cancelar</button>
+          <button type="submit" class="primary-btn">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Loading Spinner -->
+  <div id="loadingSpinner" class="loading-spinner">
+    <i class="fas fa-spinner fa-spin"></i>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

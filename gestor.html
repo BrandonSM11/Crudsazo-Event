@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>Eventos Deportivos</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Sistema de Gestión de Eventos Deportivos</h1>
+            <p>Conectando talentos con oportunidades deportivas</p>
+        </div>
+
+        <!-- Lista de Eventos Disponibles -->
+        <div class="events-list">
+            <h3>📅 Eventos Disponibles</h3>
+            <div id="eventsList"></div>
+        </div>
+
+        <!-- Formularios -->
+        <div class="forms-grid">
+            <!-- Formulario de Suscripción -->
+            <div class="form-card">
+                <h2>📧 Suscribirse a Notificaciones</h2>
+                <form id="subscriptionForm">
+                    <div class="form-group">
+                        <label for="subName">Nombre Completo *</label>
+                        <input type="text" id="subName" name="name" required>
+                        <div class="error-message" id="subNameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subEmail">Correo Electrónico *</label>
+                        <input type="email" id="subEmail" name="email" required>
+                        <div class="error-message" id="subEmailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subInterests">Deportes de Interés</label>
+                        <select id="subInterests" name="interests" multiple>
+                            <option value="ajedrez">Ajedrez</option>
+                            <option value="tenis-mesa">Tenis de Mesa</option>
+                            <option value="tejo">Tejo</option>
+                            <option value="padel">Padel</option>
+                            <option value="tenis-campo">Tenis de Campo</option>
+                        </select>
+                        <small>Mantén Ctrl presionado para seleccionar múltiples opciones</small>
+                    </div>
+
+                    <button type="submit" class="btn">Suscribirse</button>
+                </form>
+            </div>
+
+            <!-- Formulario de Contacto -->
+            <div class="form-card">
+                <h2>📞 Contacto</h2>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="contactName">Nombre Completo *</label>
+                        <input type="text" id="contactName" name="name" required>
+                        <div class="error-message" id="contactNameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactEmail">Correo Electrónico *</label>
+                        <input type="email" id="contactEmail" name="email" required>
+                        <div class="error-message" id="contactEmailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactSubject">Asunto *</label>
+                        <input type="text" id="contactSubject" name="subject" required>
+                        <div class="error-message" id="contactSubjectError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage">Mensaje *</label>
+                        <textarea id="contactMessage" name="message" required></textarea>
+                        <div class="error-message" id="contactMessageError"></div>
+                    </div>
+
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+
+            <!-- Formulario de Inscripción a Eventos -->
+            <div class="form-card">
+                <h2>🎯 Inscribirse a Evento</h2>
+                <form id="eventForm">
+                    <div class="form-group">
+                        <label for="eventSelect">Seleccionar Evento *</label>
+                        <select id="eventSelect" name="event" required>
+                            <option value="">Seleccione un evento</option>
+                        </select>
+                        <div class="error-message" id="eventSelectError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="participantName">Nombre Completo *</label>
+                        <input type="text" id="participantName" name="name" required>
+                        <div class="error-message" id="participantNameError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="participantEmail">Correo Electrónico *</label>
+                        <input type="email" id="participantEmail" name="email" required>
+                        <div class="error-message" id="participantEmailError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="participantPhone">Teléfono</label>
+                        <input type="tel" id="participantPhone" name="phone">
+                        <div class="error-message" id="participantPhoneError"></div>
+                    </div>
+
+                    <div class="form-group" id="shirtSizeGroup" style="display: none;">
+                        <label for="shirtSize">Talla de Camiseta *</label>
+                        <select id="shirtSize" name="shirtSize">
+                            <option value="">Seleccione una talla</option>
+                            <option value="XS">XS</option>
+                            <option value="S">S</option>
+                            <option value="M">M</option>
+                            <option value="L">L</option>
+                            <option value="XL">XL</option>
+                            <option value="XXL">XXL</option>
+                        </select>
+                        <div class="error-message" id="shirtSizeError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="participantType">Tipo de Participación *</label>
+                        <select id="participantType" name="type" required>
+                            <option value="">Seleccione una opción</option>
+                            <option value="participante">Participante (Jugador)</option>
+                            <option value="espectador">Espectador</option>
+                        </select>
+                        <div class="error-message" id="participantTypeError"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Nivel de Experiencia</label>
+                        <select id="experience" name="experience">
+                            <option value="">Seleccione su nivel</option>
+                            <option value="principiante">Principiante</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="avanzado">Avanzado</option>
+                            <option value="profesional">Profesional</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comments">Comentarios Adicionales</label>
+                        <textarea id="comments" name="comments" placeholder="Algún comentario o pregunta..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn">Inscribirse al Evento</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmación -->
+        <div class="confirmation-modal" id="confirmationModal">
+            <div class="modal-content">
+                <h3>✅ ¡Éxito!</h3>
+                <p id="confirmationMessage"></p>
+                <button class="btn" onclick="closeModal()">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="./js/gestor.js"></script>
+</body>
+
+</html>
