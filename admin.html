@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Panel Admin - Eventos</title>
   <link rel="stylesheet" href="./styles/styles.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 </head>
 <body>
   <header class="admin-header">
@@ -18,6 +18,7 @@
       <button onclick="showSection('events')">Eventos</button>
       <button onclick="showSection('inscripciones')">Inscripciones</button>
       <button onclick="showSection('mensajes')">Mensajes</button>
+      <button onclick="showSection('suscripciones')">Suscripciones</button>
     </nav>
 
     <!-- Sección: Eventos -->
@@ -84,6 +85,28 @@
             </tr>
           </thead>
           <tbody id="mensajesTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sección: Suscripciones -->
+    <section class="admin-section" id="suscripciones">
+      <div class="section-header">
+        <h2>Suscripciones</h2>
+      </div>
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Intereses</th>
+              <th>Fecha</th>
+              <th>Acciones</th>
+            </tr>
+          </thead>
+          <tbody id="suscripcionesTableBody"></tbody>
         </table>
       </div>
     </section>
