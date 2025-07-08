@@ -83,13 +83,15 @@ if (currentPage.includes('admin.html')) {
   }
 
   async function fetchEvents() {
-    loadingSpinner.style.display = 'flex';
-    try {
-      const res = await fetch(apiUrl);
-      const eventos = await res.json();
+  loadingSpinner.style.display = 'flex';
+  try {
+    const res = await fetch(apiUrl);
+    const eventos = await res.json();
 
-      eventsTable.innerHTML = '';
-      eventos.forEach(evento => {
+    eventsTable.innerHTML = '';
+    eventos.forEach(evento => {
+      // Solo renderiza filas si el evento tiene un título válido
+      if (evento.title) {
         const row = document.createElement('tr');
         row.innerHTML = `
           <td>${evento.id}</td>
@@ -105,13 +107,14 @@ if (currentPage.includes('admin.html')) {
           </td>
         `;
         eventsTable.appendChild(row);
-      });
-    } catch (err) {
-      showAlert('Error al cargar eventos', true);
-    } finally {
-      loadingSpinner.style.display = 'none';
-    }
+      }
+    });
+  } catch (err) {
+    showAlert('Error al cargar eventos', true);
+  } finally {
+    loadingSpinner.style.display = 'none';
   }
+}
 
   window.editEvent = async function (id) {
     try {
@@ -187,4 +190,34 @@ if (currentPage.includes('admin.html')) {
 
   // Inicializa eventos al cargar
   window.addEventListener('DOMContentLoaded', fetchEvents);
+};
+
+// Agregar nuevos eventos al index.html
+if (currentPage.includes('index.html')) {
+  document.addEventListener('DOMContentLoaded', () => {
+    fetch('http://localhost:3000/events')
+      .then(response => response.json())
+      .then(eventos => {
+        const eventsSection = document.getElementById('events');
+
+        eventos.forEach(evento => {
+          const eventCard = document.createElement('div');
+          eventCard.classList.add('event-card');
+
+          eventCard.innerHTML = `
+            <div class="event-img">
+              <img src="${evento.image || './assets/pronto.png'}" alt="${evento.title}">
+            </div>
+            <div class="event-info">
+              <h3>${evento.title}</h3>
+              <p>${evento.description || 'Sin descripción'}</p>
+              <a href="./gestor.html" class="button-link" target="_blank">Ver detalles</a>
+            </div>
+          `;
+
+          eventsSection.appendChild(eventCard);
+        });
+      })
+      .catch(error => console.error('Error al cargar eventos:', error));
+  });
 }
