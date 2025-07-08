@@ -271,13 +271,10 @@ class FormManager {
             return;
         }
 
-        if (data.participantType === 'participante') {
-        const success = this.updateEventParticipants(selectedEvent.id);
+        this.saveData('eventRegistrations', data);
 
-        if (!success) {
-            this.showError(document.getElementById('participantTypeError'), 'No hay cupos disponibles para participantes');
-        return;
-            }
+        if (data.participantType === 'participante') {
+            this.updateEventParticipants(selectedEvent.id);
         }
 
         this.sendEventRegistrationEmail(data, selectedEvent);
@@ -340,20 +337,14 @@ class FormManager {
     }
 
     updateEventParticipants(eventId) {
-    const events = JSON.parse(localStorage.getItem('events') || '[]');
-    const eventIndex = events.findIndex(event => event.id == eventId);
+        const events = JSON.parse(localStorage.getItem('events') || '[]');
+        const eventIndex = events.findIndex(event => event.id == eventId);
 
-    if (eventIndex !== -1) {
-        if (events[eventIndex].currentParticipants >= events[eventIndex].maxParticipants) {
-            return false; 
+        if (eventIndex !== -1) {
+            events[eventIndex].currentParticipants += 1;
+            localStorage.setItem('events', JSON.stringify(events));
         }
-        events[eventIndex].currentParticipants += 1;
-        localStorage.setItem('events', JSON.stringify(events));
-        return true;
     }
-    return false;
-    }
-
 
     generateUniquePin() {
         return Math.random().toString(36).substring(2, 8).toUpperCase();
@@ -517,3 +508,89 @@ window.onclick = function (event) {
         modal.style.display = 'none';
     }
 };
+
+// Función para guardar datos en localStorage bajo una clave específica
+function saveData(key, data) {
+  const existing = JSON.parse(localStorage.getItem(key) || '[]');
+  existing.push(data);
+  localStorage.setItem(key, JSON.stringify(existing));
+}
+
+// Suscripción
+document.getElementById('subscriptionForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = this.name.value.trim();
+  const email = this.email.value.trim();
+  const interests = Array.from(this.interests.selectedOptions).map(opt => opt.value);
+
+  if (!name || !email) {
+    alert('Por favor completa todos los campos obligatorios.');
+    return;
+  }
+
+  saveData('subscriptions', {
+    id: Date.now(),
+    name,
+    email,
+    interests,
+    date: new Date().toISOString()
+  });
+
+  alert('Suscripción enviada correctamente.');
+  this.reset();
+});
+
+// Mensaje de contacto
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = this.name.value.trim();
+  const email = this.email.value.trim();
+  const subject = this.subject.value.trim();
+  const message = this.message.value.trim();
+
+  if (!name || !email || !subject || !message) {
+    alert('Por favor completa todos los campos obligatorios.');
+    return;
+  }
+
+  saveData('messages', {
+    id: Date.now(),
+    name,
+    email,
+    subject,
+    message,
+    date: new Date().toISOString()
+  });
+
+  alert('Mensaje enviado correctamente.');
+  this.reset();
+});
+
+// Inscripción a evento
+document.getElementById('registrationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const eventName = this.eventName.value.trim();
+  const participantName = this.participantName.value.trim();
+  const participantEmail = this.participantEmail.value.trim();
+  const participantPhone = this.participantPhone.value.trim();
+
+  if (!eventName || !participantName || !participantEmail) {
+    alert('Por favor completa todos los campos obligatorios.');
+    return;
+  }
+
+  saveData('registrations', {
+    id: Date.now(),
+    eventName,
+    participantName,
+    participantEmail,
+    participantPhone,
+    date: new Date().toISOString()
+  });
+
+  alert('Inscripción enviada correctamente.');
+  this.reset();
+});
