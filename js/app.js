@@ -83,38 +83,63 @@ if (currentPage.includes('admin.html')) {
   }
 
   async function fetchEvents() {
-  loadingSpinner.style.display = 'flex';
-  try {
-    const res = await fetch(apiUrl);
-    const eventos = await res.json();
+    loadingSpinner.style.display = 'flex';
+    try {
+      const res = await fetch(apiUrl);
+      const eventos = await res.json();
 
-    eventsTable.innerHTML = '';
-    eventos.forEach(evento => {
-      // Solo renderiza filas si el evento tiene un título válido
-      if (evento.title) {
+      eventsTable.innerHTML = '';
+      eventos.forEach(evento => {
+        if (evento.title) {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+            <td>${evento.id}</td>
+            <td>${evento.title}</td>
+            <td>${evento.date} ${evento.time}</td>
+            <td>${evento.location}</td>
+            <td>${evento.capacity}</td>
+            <td>${evento.registered}</td>
+            <td>${evento.status}</td>
+            <td>
+              <button class="primary-btn" onclick="editEvent(${evento.id})">Editar</button>
+              <button class="danger-btn" onclick="deleteEvent(${evento.id})">Eliminar</button>
+            </td>
+          `;
+          eventsTable.appendChild(row);
+        }
+      });
+    } catch (err) {
+      showAlert('Error al cargar eventos', true);
+    } finally {
+      loadingSpinner.style.display = 'none';
+    }
+  }
+
+  async function fetchMessages() {
+    const mensajesTable = document.getElementById('mensajesTableBody');
+    if (!mensajesTable) return;
+
+    try {
+      const res = await fetch('http://localhost:3000/messages');
+      const mensajes = await res.json();
+
+      mensajesTable.innerHTML = '';
+
+      mensajes.forEach(mensaje => {
         const row = document.createElement('tr');
         row.innerHTML = `
-          <td>${evento.id}</td>
-          <td>${evento.title}</td>
-          <td>${evento.date} ${evento.time}</td>
-          <td>${evento.location}</td>
-          <td>${evento.capacity}</td>
-          <td>${evento.registered}</td>
-          <td>${evento.status}</td>
-          <td>
-            <button class="primary-btn" onclick="editEvent(${evento.id})">Editar</button>
-            <button class="danger-btn" onclick="deleteEvent(${evento.id})">Eliminar</button>
-          </td>
+          <td>${mensaje.id}</td>
+          <td>${mensaje.name}</td>
+          <td>${mensaje.email}</td>
+          <td>${mensaje.message}</td>
+          <td>${new Date(mensaje.date).toLocaleString()}</td>
         `;
-        eventsTable.appendChild(row);
-      }
-    });
-  } catch (err) {
-    showAlert('Error al cargar eventos', true);
-  } finally {
-    loadingSpinner.style.display = 'none';
+        mensajesTable.appendChild(row);
+      });
+    } catch (err) {
+      console.error('Error al cargar mensajes:', err);
+    }
   }
-}
 
   window.editEvent = async function (id) {
     try {
@@ -188,36 +213,10 @@ if (currentPage.includes('admin.html')) {
     }
   });
 
-  // Inicializa eventos al cargar
-  window.addEventListener('DOMContentLoaded', fetchEvents);
-};
-
-// Agregar nuevos eventos al index.html
-if (currentPage.includes('index.html')) {
-  document.addEventListener('DOMContentLoaded', () => {
-    fetch('http://localhost:3000/events')
-      .then(response => response.json())
-      .then(eventos => {
-        const eventsSection = document.getElementById('events');
-
-        eventos.forEach(evento => {
-          const eventCard = document.createElement('div');
-          eventCard.classList.add('event-card');
-
-          eventCard.innerHTML = `
-            <div class="event-img">
-              <img src="${evento.image || './assets/pronto.png'}" alt="${evento.title}">
-            </div>
-            <div class="event-info">
-              <h3>${evento.title}</h3>
-              <p>${evento.description || 'Sin descripción'}</p>
-              <a href="./gestor.html" class="button-link" target="_blank">Ver detalles</a>
-            </div>
-          `;
-
-          eventsSection.appendChild(eventCard);
-        });
-      })
-      .catch(error => console.error('Error al cargar eventos:', error));
+  // 👇 Este es el punto de inicialización
+  window.addEventListener('DOMContentLoaded', () => {
+    fetchEvents();
+    fetchMessages(); // 👈 Aquí se llama la nueva función
   });
 }
+

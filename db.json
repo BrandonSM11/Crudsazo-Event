@@ -81,5 +81,28 @@
       "icon": "🏐",
       "color": "#f59e0b"
     }
+  ],
+  "messages": [
+    {
+      "id": 1,
+      "name": "Ejemplo",
+      "email": "ejemplo@email.com",
+      "message": "Hola, me interesa el evento.",
+      "date": "2025-07-08T15:30:00Z"
+    },
+    {
+      "id": 1751992706897,
+      "name": "Mariana",
+      "email": "mariana@riwi.com",
+      "message": "Me interesa",
+      "date": "2025-07-08T16:38:26.893Z"
+    },
+    {
+      "id": 1751992745095,
+      "name": "Leidy",
+      "email": "adadsada@aasdad.com",
+      "message": "adadada",
+      "date": "2025-07-08T16:39:05.095Z"
+    }
   ]
 }
