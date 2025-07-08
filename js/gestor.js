@@ -271,10 +271,13 @@ class FormManager {
             return;
         }
 
-        this.saveData('eventRegistrations', data);
-
         if (data.participantType === 'participante') {
-            this.updateEventParticipants(selectedEvent.id);
+        const success = this.updateEventParticipants(selectedEvent.id);
+
+        if (!success) {
+            this.showError(document.getElementById('participantTypeError'), 'No hay cupos disponibles para participantes');
+        return;
+            }
         }
 
         this.sendEventRegistrationEmail(data, selectedEvent);
@@ -337,14 +340,20 @@ class FormManager {
     }
 
     updateEventParticipants(eventId) {
-        const events = JSON.parse(localStorage.getItem('events') || '[]');
-        const eventIndex = events.findIndex(event => event.id == eventId);
+    const events = JSON.parse(localStorage.getItem('events') || '[]');
+    const eventIndex = events.findIndex(event => event.id == eventId);
 
-        if (eventIndex !== -1) {
-            events[eventIndex].currentParticipants += 1;
-            localStorage.setItem('events', JSON.stringify(events));
+    if (eventIndex !== -1) {
+        if (events[eventIndex].currentParticipants >= events[eventIndex].maxParticipants) {
+            return false; 
         }
+        events[eventIndex].currentParticipants += 1;
+        localStorage.setItem('events', JSON.stringify(events));
+        return true;
     }
+    return false;
+    }
+
 
     generateUniquePin() {
         return Math.random().toString(36).substring(2, 8).toUpperCase();
