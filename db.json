@@ -9,56 +9,8 @@
       "name": "Administrador Sistema"
     }
   ],
-  "events": [
-    {
-      "id": 1,
-      "title": "Campeonato de ajedrez",
-      "description": "Torneo de ajedrez para descubrir nuevos talentos.",
-      "date": "2024-08-14",
-      "time": "14:00",
-      "location": "Centro Deportivo Municipal",
-      "capacity": 50,
-      "registered": 12,
-      "category": "ajedrez",
-      "image": "https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=400",
-      "organizer": "Club de campeonato local",
-      "price": 15,
-      "requirements": "Traer documentos de identidad y botella de agua",
-      "status": "active",
-      "created_at": "2025-01-15T10:30:00Z"
-    },
-    {
-      "id": 2,
-      "title": "Futbol",
-      "description": "",
-      "date": "2025-12-12",
-      "time": "14:16",
-      "location": "cas",
-      "capacity": 12,
-      "registered": 0,
-      "category": "nada",
-      "image": "https://www.shutterstock.com/image-photo/closeup-detail-several-heavy-metal-260nw-2440427575.jpg",
-      "organizer": "a",
-      "price": 1,
-      "requirements": "",
-      "status": "active",
-      "created_at": "2025-01-15T10:30:00Z"
-    }
-  ],
-  "registrations": [
-    {
-      "id": 1,
-      "eventId": 1,
-      "participantName": "Juan Pérez",
-      "participantEmail": "juan.perez@email.com",
-      "participantPhone": "555-0123",
-      "participantAge": 25,
-      "registrationDate": "2024-01-20T15:30:00Z",
-      "pin": "EVT-001-2024-A1B2",
-      "status": "confirmed",
-      "additionalInfo": "Vegetariano"
-    }
-  ],
+  "events": [],
+  "registrations": [],
   "categories": [
     {
       "id": 1,
@@ -82,27 +34,5 @@
       "color": "#f59e0b"
     }
   ],
-  "messages": [
-    {
-      "id": 1,
-      "name": "Ejemplo",
-      "email": "ejemplo@email.com",
-      "message": "Hola, me interesa el evento.",
-      "date": "2025-07-08T15:30:00Z"
-    },
-    {
-      "id": 1751992706897,
-      "name": "Mariana",
-      "email": "mariana@riwi.com",
-      "message": "Me interesa",
-      "date": "2025-07-08T16:38:26.893Z"
-    },
-    {
-      "id": 1751992745095,
-      "name": "Leidy",
-      "email": "adadsada@aasdad.com",
-      "message": "adadada",
-      "date": "2025-07-08T16:39:05.095Z"
-    }
-  ]
+  "messages": []
 }
