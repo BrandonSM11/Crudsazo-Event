@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "admin",
       "password": "admin123",
       "role": "admin",
@@ -11,24 +11,24 @@
   ],
   "events": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Campeonato de ajedrez",
-      "description": "Torneo de ajedrez para descubrir nuevos talentos.",
-      "date": "2024-08-14", 
-      "time": "14:00",
-      "location": "Centro Deportivo Municipal",
-      "capacity": 50,
-      "registered": 12,
-      "category": "ajedrez",
-      "image": "https://images.pexels.com/photos/274422/pexels-photo-274422.jpeg?auto=compress&cs=tinysrgb&w=400",
+      "description": "Competencia de ajedrez con premios.",
+      "date": "2024-08-21",
+      "time": "16:00",
+      "location": "Polideportivo Norte",
+      "capacity": 100,
+      "registered": 45,
+      "category": "juego de mesa",
+      "image": "https://images.pexels.com/photos/2531756/pexels-photo-2531756.jpeg?auto=compress&cs=tinysrgb&w=400",
       "organizer": "Club de campeonato local",
-      "price": 15,
-      "requirements": "Traer documentos de identidad y botella de agua",
+      "price": 10,
+      "requirements": "Certificado médico",
       "status": "active",
-      "created_at": "2025-01-15T10:30:00Z"
+      "created_at": "2025-01-10T14:20:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "title": "Torneo de Tenis de Mesa",
       "description": "Competencia de tenis de mesa con premios.",
       "date": "2024-08-21",
@@ -45,7 +45,7 @@
       "created_at": "2025-01-10T14:20:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "title": "Encuentro de Tejo",
       "description": "Competencia de Tejo. Formato rápido y dinámico.",
       "date": "2024-02-29",
@@ -64,7 +64,7 @@
   ],
   "registrations": [
     {
-      "id": 1,
+      "id": "1",
       "eventId": 1,
       "participantName": "Juan Pérez",
       "participantEmail": "juan.perez@email.com",
@@ -76,7 +76,7 @@
       "additionalInfo": "Vegetariano"
     },
     {
-      "id": 2,
+      "id": "2",
       "eventId": 2,
       "participantName": "María González",
       "participantEmail": "maria.gonzalez@email.com",
@@ -90,21 +90,21 @@
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "ajedrez",
       "displayName": "Ajedrez",
       "icon": "♟️",
       "color": "#22c55e"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "tenis de mesa",
       "displayName": "Tenis de Mesa",
       "icon": "🏓",
       "color": "#3b82f6"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "tejo",
       "displayName": "Tejo",
       "icon": "🏐",

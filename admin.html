@@ -14,12 +14,18 @@
   </header>
 
   <main class="admin-main">
+    <nav class="admin-nav">
+      <button onclick="showSection('events')">Eventos</button>
+      <button onclick="showSection('inscripciones')">Inscripciones</button>
+      <button onclick="showSection('mensajes')">Mensajes</button>
+    </nav>
+
+    <!-- Sección: Eventos -->
     <section class="admin-section active" id="events">
       <div class="section-header">
         <h2>Eventos</h2>
         <button class="primary-btn" onclick="showEventModal()">+ Agregar Evento</button>
       </div>
-
       <div class="table-container">
         <table class="data-table">
           <thead>
@@ -35,6 +41,49 @@
             </tr>
           </thead>
           <tbody id="eventsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sección: Inscripciones -->
+    <section class="admin-section" id="inscripciones">
+      <div class="section-header">
+        <h2>Inscripciones</h2>
+      </div>
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Evento</th>
+              <th>PIN</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="inscripcionesTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sección: Mensajes -->
+    <section class="admin-section" id="mensajes">
+      <div class="section-header">
+        <h2>Mensajes de Contacto</h2>
+      </div>
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Email</th>
+              <th>Mensaje</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="mensajesTableBody"></tbody>
         </table>
       </div>
     </section>
@@ -72,6 +121,6 @@
     <i class="fas fa-spinner fa-spin"></i>
   </div>
 
-  <script src="js/app.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>

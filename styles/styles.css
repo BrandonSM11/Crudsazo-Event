@@ -812,48 +812,48 @@ body {
 }
 
  /* Panel de administración (admin.html)  */
- :root {
-  --primary: #20b2aa;
-  --secondary: #f9fafb;
-  --white: #ffffff;
-  --gray: #e5e7eb;
-  --danger: #ef4444;
-  --radius: 8px;
-  --shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  background-color: var(--secondary);
-  color: #333;
-}
-
+ /* ======== ADMIN PANEL GENERAL ======== */
 .admin-header {
-  background-color: var(--primary);
+  background-color: var(--azul-agua-marina);
   color: white;
-  padding: 1rem 2rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
-.logout-btn {
-  background-color: var(--white);
-  color: var(--primary);
+.admin-main {
+  padding: 1rem;
+  background-color: #f9f9f9;
+}
+.admin-nav {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.admin-nav button {
   padding: 0.5rem 1rem;
-  border-radius: var(--radius);
+  background-color: #eaeaea;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
+  transition: background 0.3s;
+}
+.admin-nav button:hover {
+  background-color: var(--amarillo-pastel);
+}
+.admin-nav button.active {
+  background-color: var(--azul-agua-marina);
+  color: white;
 }
 
-.admin-main {
-  padding: 2rem;
-  max-width: 1000px;
-  margin: 0 auto;
+/* ======== SECCIONES ======== */
+.admin-section {
+  display: none;
 }
-
+.admin-section.active {
+  display: block;
+}
 .section-header {
   display: flex;
   justify-content: space-between;
@@ -861,114 +861,138 @@ body {
   margin-bottom: 1rem;
 }
 
-.primary-btn, .secondary-btn {
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.primary-btn {
-  background-color: var(--primary);
-  color: white;
-}
-
-.secondary-btn {
-  background-color: var(--gray);
-  color: #333;
-}
-
+/* ======== TABLAS ======== */
 .table-container {
   overflow-x: auto;
-  background: var(--white);
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
 }
-
 .data-table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 800px;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
-
 .data-table th, .data-table td {
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--gray);
+  border-bottom: 1px solid #ddd;
   text-align: left;
 }
-
 .data-table th {
-  background-color: var(--gray);
+  background-color: #f4f4f4;
+}
+.data-table tr:hover {
+  background-color: #fdfdfd;
 }
 
+/* ======== BOTONES ======== */
+.primary-btn {
+  background-color: var(--azul-agua-marina);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.secondary-btn {
+  background-color: #ddd;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.logout-btn {
+  background-color: var(--rojo-suave);
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* ======== MODAL ======== */
 .modal {
   display: none;
   position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.4);
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
   justify-content: center;
   align-items: center;
   z-index: 999;
 }
-
 .modal-content {
-  background-color: var(--white);
-  padding: 1rem;
-  border-radius: var(--radius);
-  width: 100%;
-  max-width: 500px;
-  box-shadow: var(--shadow);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  animation: scaleIn 0.3s ease;
 }
-
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
 }
-
 .modal-body input,
 .modal-body textarea {
   width: 100%;
   padding: 0.6rem;
-  border: 1px solid var(--gray);
-  border-radius: var(--radius);
-  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
-
-.form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
 .close-btn {
   background: transparent;
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #666;
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
+/* ======== LOADING ======== */
 .loading-spinner {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(255,255,255,0.5);
   display: none;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--azul-agua-marina);
   font-size: 2rem;
-  color: var(--primary);
 }
+
+/* ======== UTILIDADES ======== */
+.status-full {
+  background: #FADBD8;
+  color: #E74C3C;
+  font-weight: bold;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+.status-available {
+  background: #D5F4E6;
+  color: #27AE60;
+  font-weight: bold;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* ======== ANIMACIONES ======== */
+@keyframes scaleIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ======== RESPONSIVE ======== */
 
 @media (max-width: 768px) {
   .admin-header, .section-header {

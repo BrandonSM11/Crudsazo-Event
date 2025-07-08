@@ -1,6 +1,7 @@
 // Detecta en qué página está
 const currentPage = window.location.pathname;
 
+
 // Login.html
 if (currentPage.includes('login.html')) {
   document.getElementById('loginForm').addEventListener('submit', async function (e) {
@@ -41,7 +42,7 @@ if (currentPage.includes('login.html')) {
 
 // Admin.html
 if (currentPage.includes('admin.html')) {
-  const apiUrl = 'http://localhost:3000/eventos';
+  const apiUrl = 'http://localhost:3000/events';
   const eventsTable = document.getElementById('eventsTableBody');
   const eventForm = document.getElementById('eventForm');
   const eventModal = document.getElementById('eventModal');
@@ -49,7 +50,6 @@ if (currentPage.includes('admin.html')) {
 
   let editEventId = null;
 
-  // Mostrar y ocultar secciones
   window.showSection = function (id) {
     document.querySelectorAll('.admin-section').forEach(section => section.classList.remove('active'));
     document.getElementById(id).classList.add('active');
@@ -93,15 +93,15 @@ if (currentPage.includes('admin.html')) {
         const row = document.createElement('tr');
         row.innerHTML = `
           <td>${evento.id}</td>
-          <td>${evento.nombre || 'Sin título'}</td>
-          <td>${evento.fecha}</td>
-          <td>${evento.ubicacion || ''}</td>
-          <td>${evento.cupos || 0}</td>
-          <td>${evento.inscritos || 0}</td>
-          <td>${evento.estado || 'Activo'}</td>
+          <td>${evento.title}</td>
+          <td>${evento.date} ${evento.time}</td>
+          <td>${evento.location}</td>
+          <td>${evento.capacity}</td>
+          <td>${evento.registered}</td>
+          <td>${evento.status}</td>
           <td>
-            <button onclick="editEvent(${evento.id})">Editar</button>
-            <button onclick="deleteEvent(${evento.id})">Eliminar</button>
+            <button class="primary-btn" onclick="editEvent(${evento.id})">Editar</button>
+            <button class="danger-btn" onclick="deleteEvent(${evento.id})">Eliminar</button>
           </td>
         `;
         eventsTable.appendChild(row);
@@ -119,17 +119,17 @@ if (currentPage.includes('admin.html')) {
       const evento = await res.json();
       editEventId = id;
 
-      document.getElementById('eventTitle').value = evento.nombre;
-      document.getElementById('eventDate').value = evento.fecha;
-      document.getElementById('eventLocation').value = evento.ubicacion;
-      document.getElementById('eventCapacity').value = evento.cupos;
-      document.getElementById('eventOrganizer').value = evento.organizador || '';
-      document.getElementById('eventDescription').value = evento.descripcion || '';
-      document.getElementById('eventTime').value = evento.hora || '';
-      document.getElementById('eventPrice').value = evento.precio || 0;
-      document.getElementById('eventImage').value = evento.imagen || '';
-      document.getElementById('eventRequirements').value = evento.requisitos || '';
-      document.getElementById('eventCategory').value = evento.categoria || '';
+      document.getElementById('eventTitle').value = evento.title;
+      document.getElementById('eventDate').value = evento.date;
+      document.getElementById('eventTime').value = evento.time;
+      document.getElementById('eventLocation').value = evento.location;
+      document.getElementById('eventCapacity').value = evento.capacity;
+      document.getElementById('eventPrice').value = evento.price;
+      document.getElementById('eventCategory').value = evento.category;
+      document.getElementById('eventImage').value = evento.image || '';
+      document.getElementById('eventOrganizer').value = evento.organizer || '';
+      document.getElementById('eventDescription').value = evento.description || '';
+      document.getElementById('eventRequirements').value = evento.requirements || '';
 
       document.getElementById('eventModalTitle').textContent = 'Editar Evento';
       toggleModal(true);
@@ -153,19 +153,20 @@ if (currentPage.includes('admin.html')) {
     e.preventDefault();
 
     const data = {
-      nombre: document.getElementById('eventTitle').value.trim(),
-      fecha: document.getElementById('eventDate').value,
-      ubicacion: document.getElementById('eventLocation').value.trim(),
-      cupos: parseInt(document.getElementById('eventCapacity').value, 10),
-      organizador: document.getElementById('eventOrganizer').value.trim(),
-      descripcion: document.getElementById('eventDescription').value.trim(),
-      hora: document.getElementById('eventTime').value,
-      precio: parseFloat(document.getElementById('eventPrice').value),
-      imagen: document.getElementById('eventImage').value.trim(),
-      requisitos: document.getElementById('eventRequirements').value.trim(),
-      categoria: document.getElementById('eventCategory').value,
-      inscritos: 0,
-      estado: 'Activo'
+      title: document.getElementById('eventTitle').value.trim(),
+      date: document.getElementById('eventDate').value,
+      time: document.getElementById('eventTime').value,
+      location: document.getElementById('eventLocation').value.trim(),
+      capacity: parseInt(document.getElementById('eventCapacity').value, 10),
+      price: parseFloat(document.getElementById('eventPrice').value),
+      category: document.getElementById('eventCategory').value,
+      image: document.getElementById('eventImage').value.trim(),
+      organizer: document.getElementById('eventOrganizer').value.trim(),
+      description: document.getElementById('eventDescription').value.trim(),
+      requirements: document.getElementById('eventRequirements').value.trim(),
+      registered: 0,
+      status: 'active',
+      created_at: new Date().toISOString()
     };
 
     try {
@@ -184,5 +185,6 @@ if (currentPage.includes('admin.html')) {
     }
   });
 
-  fetchEvents();
+  // Inicializa eventos al cargar
+  window.addEventListener('DOMContentLoaded', fetchEvents);
 }
